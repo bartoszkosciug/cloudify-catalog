@@ -88,8 +88,10 @@ def main():
 		try:
 			catalog = yaml.safe_load(stream)
 		except yaml.YAMLError as exc:
-			print(exc)
-
+			print("YamlError: {}".format(exc))
+		except Exception as err:
+			print(err)
+	
 	head = Repository('.').head.shorthand
 	target_path_subfolder = get_target_sub_folder(head)
 
