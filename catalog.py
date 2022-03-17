@@ -8,7 +8,7 @@ import datetime
 
 from pygit2 import Repository
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(format='%(levelname)s - %(message)s', level=logging.INFO)
 
 def create_build_directories():
 	"""Creates a build directory and catalogs directory in it
@@ -88,8 +88,10 @@ def main():
 		try:
 			catalog = yaml.safe_load(stream)
 		except yaml.YAMLError as exc:
-			print(exc)
-
+			print("YamlError: {}".format(exc))
+		except Exception as err:
+			print(err)
+	
 	head = Repository('.').head.shorthand
 	target_path_subfolder = get_target_sub_folder(head)
 
